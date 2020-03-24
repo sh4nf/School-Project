@@ -33,7 +33,6 @@
 		$conn = dbCONN();
 		###########################
 
-		# Создание поста (уязвимое место №2)
 		if((!empty($_POST['author'])) AND (!empty($_POST['content'])) AND (!empty($_POST['title']))){
 			$author = $_POST['author'];
 			$content = $_POST['content'];
@@ -43,12 +42,12 @@
 			mysqli_query($conn, $sql);
 		}
 
-		# Запрос к базе данных (уязвимое место №1)
+		# Запрос к базе данных
 		$sql = 'SELECT * FROM posts';
 		$result = $conn->query($sql);
 		##########################################
 
-		# Обработка полученных данных
+		# Обработка полученных данных (уязвимое место)
 		while($row = $result->fetch_assoc()){
 			echo "<div class='post'><h1>Post: " . $row['post_id'] . ' ' . $row['title'] . ' by: ' . $row['author'] . '</h1><p>' . $row['content'] . '</p></div>';
 		}
